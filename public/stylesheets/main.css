@@ -10,7 +10,7 @@ h1{
     display: inline;
 }
 
-@keyframes header {
+/* @keyframes header {
     0% {
         left: 0;
     }
@@ -22,14 +22,15 @@ h1{
     100% {
         left: 0px;
     }
-}
+} */
 
 li{
     border: 3px solid #ccc;
-    width: 300px;
+    width: 65vw;
     margin: 20px;
-    padding: 20px;
-    border-radius: 10px; 
+    padding: 1rem;
+    border-radius: 10px;
+    list-style: none; 
 }
 h4{
     margin-top: 10px;
@@ -38,16 +39,22 @@ h4{
 .add-task{
     font-size: 22px;
 }
+form{
+    margin: auto;
+    display: block;
+    width: 200px;
+}
 
 form input {
     color: inherit;
     background: transparent;
     border: 2px solid #287eb8;
     border-radius: 20px;
-    margin: 25px 10px;;
+    margin: 5px;
     padding: 12px 14px;
     text-align: center;
     outline: none;
+    display: block;
 }
 
 form input:focus,
@@ -63,9 +70,28 @@ form button {
     border-radius: 20px;
     border: 2px solid #2ecc71;
     cursor: pointer;
-
+    margin: 5px auto;
+    display: block;
 }
 
 form button:hover {
     background: #2ecc71;
+}
+
+/* Desktop view */
+
+@media (min-width: 640px){
+    li{
+        width: 300px;
+    }
+    form{
+        margin: 5px;
+        display: inline;
+    }
+    form input{
+        display: inline-block;
+    }
+    form button{
+        display: inline;    
+    }
 }
