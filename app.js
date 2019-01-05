@@ -1,7 +1,10 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyparser = require('body-parser');
-
+var passport = require('passport');
+var LocalStrategy = require('passport-local');
+var User = require("./models/user");
+var Task = require('./models/tasks');
 var app = express()
 app.use(bodyparser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -17,25 +20,71 @@ mongoose.connection.once('open',function(){
     console.log("Connected to mongoDB")
 })
 
-var Task = require('./models/tasks');
+// PASSPORT CONFIG
+app.use(require('express-session')({
+    secret: "I am the best",
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
+// FUNCTION=======================
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/");
+}
+//================================
+// ===============================
 // Routes
+//================================
+app.get("/",function(req,res){
+    res.render("home");
+});
 
-app.get("/:id", function(req,res){
-    Task.find({},function(err,tasks){
+app.post("/",passport.authenticate("local",
+{
+    successRedirect: "/tasks",
+    failureRedirect: "/"
+}),function(req,res){
+});
+
+app.get("/logout",function(req,res){
+    req.logout();
+    res.redirect("/");
+});
+
+app.get("/tasks",isLoggedIn, function(req,res){
+    Task.find({'user.username':req.user.username},function(err,tasks){
         if(err)
         {
             console.log(err);
         }
         else
         {   
-            res.render("home",{tasks : tasks});
+            console.log(tasks);
+            res.render("tasks",{tasks : tasks, currentUser: req.user});
         }
     })
 });
 
-app.post("/", function(req,res){
-    Task.create(req.body,function(err,task){
+app.post("/tasks",isLoggedIn, function (req, res) {
+    console.log(req.user);
+    var submition = {task: req.body.task, 
+        user:{
+            id: req.user._id,
+            username: req.user.username,
+            name: req.user.firstname + " " + req.user.lastname
+        }
+    };
+    console.log(submition);
+    Task.create(submition,function(err,task){
         if(err){
             console.log(err);
         }
@@ -45,15 +94,35 @@ app.post("/", function(req,res){
         }
     });
 
-    res.redirect("/jnk");
+    res.redirect("/tasks");
+});
+
+// AUTH ROUTE
+
+app.get("/register",function(req,res){
+    res.render("register");
+});
+
+app.post("/register",function(req,res){
+    var newUser = new User({firstname: req.body.firstname,lastname: req.body.lastname, username: req.body.username});
+    User.register(newUser, req.body.password,function(err, user){
+        if(err){
+            console.log(err);
+            return res.render("register");
+        }
+        passport.authenticate("local")(req, res, function(){
+            res.redirect("/");
+        })
+    });
 });
 
 app.get("*", function(req,res){
     res.send("Error 404. Entered URL is either moved to another location or is removed by the admin");
 });
 
+
 // Listener
 
-app.listen(3000,function(){
-    console.log("Server started on port 3000...");
+app.listen(8000,function(){
+    console.log("Server started on port 8000...");
 });
