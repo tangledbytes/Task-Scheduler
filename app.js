@@ -63,9 +63,23 @@ app.post("/",passport.authenticate("local",
 {
     successRedirect: "/tasks",
     failureRedirect: "/",
-    failureFlash: true
+    failureFlash: true,
+    successFlash: true
 }),function(req,res){
 });
+// app.post('/', function (req, res, next) {
+//     passport.authenticate('local', function (err, user, info) {
+//         if (err) { return next(err); }
+//         if (!user) { 
+//             req.flash("error4","Username or password is invalid");
+//             return res.render('home',{message: req.flash("error4")}); 
+//         }
+//         req.logIn(user, function (err) {
+//             if (err) { return next(err); }
+//             return res.redirect('tasks',{message: ""});
+//         });
+//     })(req, res, next);
+// });
 
 app.get("/logout",function(req,res){
     req.logout();
@@ -81,32 +95,39 @@ app.get("/tasks",isLoggedIn, function(req,res){
         else
         {   
             console.log(tasks);
-            res.render("tasks",{tasks : tasks, currentUser: req.user});
+            res.render("tasks",{tasks : tasks, currentUser: req.user,message: ""});
         }
     })
 });
 
 app.post("/tasks",isLoggedIn, function (req, res) {
     console.log(req.user);
-    var submition = {task: req.body.task, 
-        user:{
-            id: req.user._id,
-            username: req.user.username,
-            name: req.user.firstname + " " + req.user.lastname
-        }
-    };
-    console.log(submition);
-    Task.create(submition,function(err,task){
-        if(err){
-            console.log(err);
-        }
-        else
-        {
-            console.log(task);
-        }
-    });
+    if(req.body.task.length > 0){
+        var submition = {
+            task: req.body.task,
+            user: {
+                id: req.user._id,
+                username: req.user.username,
+                name: req.user.firstname + " " + req.user.lastname
+            }
+        };
+        console.log(submition);
+        Task.create(submition, function (err, task) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                console.log(task);
+            }
+        });
 
-    res.redirect("/tasks");
+        res.redirect("/tasks");
+    }
+    else
+    {
+        res.redirect("/tasks");
+    }
+    console.log(req.body.task.length);
 });
 
 // DELETE A TASK
@@ -150,6 +171,8 @@ app.get("*", function(req,res){
 
 // Listener
 
-app.listen(process.env.PORT,process.env.IP,function(){
+app.listen(process.env.PORT, process.env.IP, function () {
     console.log("Server started....");
 });
+
+//process.env.PORT, process.env.IP

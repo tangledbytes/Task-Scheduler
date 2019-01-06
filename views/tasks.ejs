@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/stylesheets/main.css">
     <title>Task Scheduler</title>
 </head>
-
+<p class="flash-message"><%= message%></p>
 <body>
     <nav>
         <ul>
@@ -17,6 +17,7 @@
             <li class="logout"><a href="/logout">Logout</a></li>
         </ul>
     </nav>
+   
     <header>
         <h1>Welcome to the task Scheduler</h1>
     </header>
@@ -38,7 +39,7 @@
     </ol>
     <div class="add-task-head">Add Tasks:</div>
     <form action="/tasks" method="POST" class="add-task">
-        <input type="text" name="task" placeholder="Task">
+        <input type="text" name="task" placeholder="Task" required>
         <button>Submit</button>
     </form>
 </body>
