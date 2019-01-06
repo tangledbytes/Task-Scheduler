@@ -55,7 +55,10 @@ function isLoggedIn(req, res, next) {
 // Routes
 //================================
 app.get("/",function(req,res){
-
+    console.log(req.user);
+    if (req.isAuthenticated()) {
+        return res.redirect("/tasks");
+    }
     res.render("home",{message: req.flash("error")});
 });
 
