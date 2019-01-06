@@ -71,7 +71,7 @@ form input {
 form input:focus,
 form input:hover {
     border: 2px solid #2ecc71;
-    padding: 12px 42px;
+    padding: 12px 34px;
     margin: 25px auto;
 }
 
