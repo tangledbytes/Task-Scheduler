@@ -5,10 +5,14 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var User = require("./models/user");
 var Task = require('./models/tasks');
+var methodOverride = require('method-override');
+var flash = require('connect-flash');
 var app = express()
 app.use(bodyparser.urlencoded({extended: true}));
+app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use(flash());
 
 // Setting up mongoose
 
@@ -38,6 +42,7 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
+    req.flash("error", "You need to login first!");
     res.redirect("/");
 }
 //================================
@@ -45,7 +50,8 @@ function isLoggedIn(req, res, next) {
 // Routes
 //================================
 app.get("/",function(req,res){
-    res.render("home");
+
+    res.render("home",{message: req.flash("error")});
 });
 
 app.post("/",passport.authenticate("local",
@@ -97,21 +103,36 @@ app.post("/tasks",isLoggedIn, function (req, res) {
     res.redirect("/tasks");
 });
 
+// DELETE A TASK
+
+app.delete('/tasks/:id', function (req, res) {
+    Task.findByIdAndDelete(req.params.id, function(err, obj){
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log(obj);
+        }
+    });
+    res.redirect("/tasks");
+})
+
 // AUTH ROUTE
 
 app.get("/register",function(req,res){
-    res.render("register");
+    res.render("register",{message: ""});
 });
 
 app.post("/register",function(req,res){
     var newUser = new User({firstname: req.body.firstname,lastname: req.body.lastname, username: req.body.username});
     User.register(newUser, req.body.password,function(err, user){
         if(err){
+            req.flash("error2", "This is username is already taken, try another one");
             console.log(err);
-            return res.render("register");
+            return res.render("register",{message: req.flash("error2")});
         }
         passport.authenticate("local")(req, res, function(){
-            res.redirect("/");
+            res.redirect("/tasks");
         })
     });
 });

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
     <link rel="stylesheet" href="/stylesheets/home.css">
     <title>Task Scheduler</title>
 </head>
@@ -14,9 +15,10 @@
             <li><a href="/register">Sign Up</a></li>
         </ul>
     </nav>
+    <p class="flash-message"><%= message%></p>
     <h1>Welcome to the task Scheduler</h1>
-    <fieldset>
-        <legend>LOGIN INTO TASKSCHEDULER</legend>
+    <fieldset class="fieldset">
+        <legend class="legend">LOGIN</legend>
             <form action="/" method="POST">
                 <input type="text"name="username"placeholder="Username">
                 <input type="password" name="password" placeholder="Password">

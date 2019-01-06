@@ -2,14 +2,17 @@ body{
     font-family: sans-serif;
     background: black;
     color: white;
+    font-family: 'PT Sans Narrow',
+    sans-serif;
 }
 nav {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: #ccc;
+    background-color: #34495e;
     height: 3rem;
+    z-index: 100;
 }
 
 nav li {
@@ -18,11 +21,14 @@ nav li {
     list-style: none;
     display: inline-block;
     font-size: 1.2rem;
+    color: black;
 }
-
 a {
     text-decoration: none;
-    color: black;
+    color: white;
+    font-weight: 800;
+    font-size: 22px;
+    border-radius: 10px;
 }
 
 .brand {
