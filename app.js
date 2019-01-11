@@ -16,12 +16,9 @@ app.use(flash());
 
 // Setting up mongoose
 
- mongoose.connect('mongodb://utkarshsrivastava23:#utkarsh#password#23@ds249824.mlab.com:49824/taskscheduler', {
+ mongoose.connect('mongodb://localhost/task_scheduler', {
      useNewUrlParser: true
  });
-// mongoose.connect('mongodb://localhost/task_scheduler', {
-//     useNewUrlParser: true
-// });
 mongoose.connection.on('error',function(err){
     console.log(err);
 });
@@ -174,8 +171,6 @@ app.get("*", function(req,res){
 
 // Listener
 
-app.listen(process.env.PORT, process.env.IP, function () {
+app.listen(8000, function () {
     console.log("Server started....");
 });
-
-//process.env.PORT, process.env.IP
