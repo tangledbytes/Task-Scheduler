@@ -12,4 +12,4 @@ document.getElementById("pass2").addEventListener('keyup', function(){
         document.querySelector('.login-btn').classList.add('disable');
         document.querySelector('.login-btn').disabled = true;
     }
-})
+});

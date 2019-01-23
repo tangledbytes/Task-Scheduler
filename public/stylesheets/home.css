@@ -1,13 +1,13 @@
 *{
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Quicksand', sans-serif;
 }
 html{
     height: 100%;
 }
 body{
     position: relative;
-    font-family: 'Quicksand', sans-serif;
 }
 .flash-message{
     position: absolute;
@@ -31,7 +31,7 @@ body{
 .nav-bar ul, .footer ul{
     list-style: none;
 }
-.nav-bar ul, .footer ul{
+.nav-bar ul, .footer ul, .navs{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -46,6 +46,15 @@ body{
 .nav-bar a{
     text-decoration: none;
     color: white;
+}
+#stylesheet1, #stylesheet2{
+    background: transparent;
+    color: white;
+    border: 0;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    outline: none;
 }
 .heading{
     text-align: center;
