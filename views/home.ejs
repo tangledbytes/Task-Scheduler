@@ -5,25 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
-    <link rel="stylesheet" href="/stylesheets/home.css">
+    <link rel="stylesheet" href="/stylesheets/home.css" class="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <title>Task Scheduler</title>
 </head>
-<body>
-    <nav>
+<body class="super-container">
+    <nav class="nav-bar">
         <ul>
             <li class="brand"><a href="/">TS</a></li>
-            <li><a href="/register">Sign Up</a></li>
+            <li class="sign-up"><a href="/register">Sign Up</a></li>
         </ul>
     </nav>
-    <div class="flash-message"><%=message%></div>
-    <h1>Welcome to the task Scheduler</h1>
-    <fieldset class="fieldset">
-        <legend class="legend">LOGIN</legend>
-            <form action="/" method="POST">
+    <main class="container">
+        <% if(message.length > 0) { %>
+        <div class="flash-message"><%=message%></div>
+        <% } %>
+        <h1 class="heading">Welcome to the task Scheduler</h1>
+        <div class="login-form"> 
+            <div class="image"></div>   
+            <form action="/" method="POST" class="login">
+                <div class="login-text">LOGIN</div>
                 <input type="text"name="username"placeholder="Username">
                 <input type="password" name="password" placeholder="Password">
-                <button>Login</button>
+                <button class="login-btn">Login</button>
             </form>
-    </fieldset>
+        </div>
+    </main>
+    <footer class="footer">
+        <ul>
+            <li>About Project</li>
+            <li>Contact Me</li>
+        </ul>
+    </footer>
 </body>
 </html>

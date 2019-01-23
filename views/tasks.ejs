@@ -6,42 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow" rel="stylesheet">
-    <link rel="stylesheet" href="/stylesheets/main.css">
+    <link rel="stylesheet" href="/stylesheets/home.css" class="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/main.css" class="stylesheet">
     <title>Task Scheduler</title>
 </head>
-<p class="flash-message"><%= message%></p>
-<body>
-    <nav>
+<body class="super-container">
+    <nav class="nav-bar">
         <ul>
             <li class="brand"><a href="/">TS</a></li>
             <li class="logout"><a href="/logout">Logout</a></li>
         </ul>
     </nav>
-   
-    <header>
-        <h1>Welcome to the task Scheduler</h1>
-    </header>
-    <h3 class="heading-task">Tasks:</h3>
-    <ol>
-        <% tasks.forEach(function(task){ %>
-        <li class="tasks">
-            <h4 class="user-name">
-                <%=task.user.name%>
-            </h4>
-            <p>
-                <%=task.task%>
-            </p>
-            <form action="/tasks/<%= task._id%>?_method=DELETE" method="POST">
-                <button>DELETE</button>
-            </form>
-        </li>
-        <%});%>
-    </ol>
-    <div class="add-task-head">Add Tasks:</div>
-    <form action="/tasks" method="POST" class="add-task">
-        <input type="text" name="task" placeholder="Task" required>
-        <button>Submit</button>
-    </form>
+    <% if(message.length > 0) { %>
+    <div class="flash-message"><%=message%></div>
+    <% } %>
+    <main>
+        <h1 class="heading">Welcome to the task Scheduler</h1>
+        <h3 class="heading-task">Tasks:</h3>
+        <ol>
+            <% tasks.forEach(function(task){ %>
+            <li class="tasks">
+                <h4 class="user-name">
+                    <%=task.user.name%>
+                </h4>
+                <p>
+                    <%=task.task%>
+                </p>
+                <form action="/tasks/<%= task._id%>?_method=DELETE" method="POST">
+                    <button>DELETE</button>
+                </form>
+            </li>
+            <%});%>
+        </ol>
+        <div class="add-task-head">Add Tasks:</div>
+        <form action="/tasks" method="POST" class="add-task">
+            <input type="text" name="task" placeholder="Task" required>
+            <button>Submit</button>
+        </form>
+    </main>
+    <footer class="footer">
+        <ul>
+            <li>About Project</li>
+            <li>Contact Me</li>
+        </ul>
+    </footer>
 </body>
 
 </html>
