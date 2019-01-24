@@ -32,19 +32,21 @@
         <% if(message.length > 0) { %>
         <div class="flash-message"><%=message%></div>
         <% } %>
-        <!-- <h1 class="heading">Welcome to the Task Scheduler</h1> -->
-        <div class="login-form"> 
-            <div class="image"></div>   
-            <form action="/register" method="POST" class="login">
-                <div class="login-text">SIGN UP</div>
-                <input type="text" name="firstname" placeholder="First Name" required>
-                <input type="text" name="lastname" placeholder="Last Name" required>
-                <input type="text" name="username" placeholder="Username" required>
-                <input type="password" name="password" placeholder="Password" id="pass1" required>
-                <input type="password" name="password" placeholder="Confirm Password" id="pass2" required>
-                <p class="alert message"></p>     
-                <button class="login-btn disable">Sign Up</button>
-            </form>
+        <h1 class="heading">Welcome to the Task Scheduler</h1>
+        <div class="wrapper">
+            <div class="login-form"> 
+                <div class="image"></div>   
+                <form action="/register" method="POST" class="login">
+                    <div class="login-text">SIGN UP</div>
+                    <input type="text" name="firstname" placeholder="First Name" required>
+                    <input type="text" name="lastname" placeholder="Last Name" required>
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="password" name="password" placeholder="Password" id="pass1" required>
+                    <input type="password" name="password" placeholder="Confirm Password" id="pass2" required>
+                    <p class="alert message"></p>     
+                    <button class="login-btn disable">Sign Up</button>
+                </form>
+            </div>
         </div>
     </main>
     <footer class="footer">
