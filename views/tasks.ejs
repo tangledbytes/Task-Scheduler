@@ -12,16 +12,33 @@
 </head>
 <body class="super-container">
     <nav class="nav-bar">
+            <ul>
+                <li class="brand"><a href="/">TS</a></li>
+                <div class="navs">
+                    <div class="hamburger">
+                        <div class="lines"></div>
+                        <div class="lines"></div>
+                        <div class="lines"></div>
+                    </div>
+                    <div class="dropdown">
+                        <li><button id="stylesheet1">Default look</button></li>
+                        <li><button id="stylesheet2">Dark look</button></li>
+                        <li class="sign-up"><a href="/logout">Logout</a></li>
+                    </div>
+                </div>
+            </ul>
+    </nav>
+    <!-- <nav class="nav-bar">
         <ul>
             <li class="brand"><a href="/">TS</a></li>
             <li class="logout"><a href="/logout">Logout</a></li>
         </ul>
-    </nav>
+    </nav> -->
     <% if(message.length > 0) { %>
     <div class="flash-message"><%=message%></div>
     <% } %>
     <main>
-        <h1 class="heading">Welcome to the task Scheduler</h1>
+        <h1 class="heading">Welcome to the Task Scheduler</h1>
         <h3 class="heading-task">Tasks:</h3>
         <ol>
             <% tasks.forEach(function(task){ %>
@@ -33,7 +50,7 @@
                     <%=task.task%>
                 </p>
                 <form action="/tasks/<%= task._id%>?_method=DELETE" method="POST">
-                    <button>DELETE</button>
+                    <button class="login-btn">DELETE</button>
                 </form>
             </li>
             <%});%>
@@ -41,7 +58,7 @@
         <div class="add-task-head">Add Tasks:</div>
         <form action="/tasks" method="POST" class="add-task">
             <input type="text" name="task" placeholder="Task" required>
-            <button>Submit</button>
+            <button class="login-btn">Submit</button>
         </form>
     </main>
     <footer class="footer">
@@ -50,6 +67,7 @@
             <li>Contact Me</li>
         </ul>
     </footer>
+    <script src="../theme.js"></script>
 </body>
 
 </html>

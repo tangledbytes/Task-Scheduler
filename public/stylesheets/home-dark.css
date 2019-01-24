@@ -27,7 +27,7 @@ body{
 }
 .super-container{
     display: grid;
-    grid-template-rows: 8% 84% 8%;
+    grid-template-rows: 3.7rem 1fr 3.7rem;
     height: 100%;
 }
 .nav-bar ul, .footer ul{

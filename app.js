@@ -67,19 +67,6 @@ app.post("/",passport.authenticate("local",
     successFlash: true
 }),function(req,res){
 });
-// app.post('/', function (req, res, next) {
-//     passport.authenticate('local', function (err, user, info) {
-//         if (err) { return next(err); }
-//         if (!user) { 
-//             req.flash("error4","Username or password is invalid");
-//             return res.render('home',{message: req.flash("error4")}); 
-//         }
-//         req.logIn(user, function (err) {
-//             if (err) { return next(err); }
-//             return res.redirect('tasks',{message: ""});
-//         });
-//     })(req, res, next);
-// });
 
 app.get("/logout",function(req,res){
     req.logout();
